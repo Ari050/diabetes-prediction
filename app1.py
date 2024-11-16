@@ -8,34 +8,19 @@ label_encoders = joblib.load('label_encoders.pkl')
 features_columns = joblib.load('features_columns.pkl')
 
 # Define the Streamlit app
-st.set_page_config(page_title="Prediksi Diabetes", page_icon="🩺", layout="centered")
-
-# Sidebar
-with st.sidebar:
-    st.image("https://via.placeholder.com/300x200.png?text=Diabetes+Prediction", caption="Prediksi Diabetes", use_column_width=True)
-    st.write("Masukkan informasi kesehatan Anda di form untuk mengetahui risiko diabetes.")
-    st.markdown("**Instruksi:**")
-    st.markdown("1. Isi semua kolom dengan informasi yang sesuai.")
-    st.markdown("2. Klik tombol **Prediksi** untuk melihat hasilnya.")
-
-# Header
-st.title("🩺 Aplikasi Prediksi Diabetes")
-st.markdown("**Deteksi dini risiko diabetes dengan algoritma machine learning.**")
-st.write("---")
+st.title("Aplikasi Prediksi Diabetes")
+st.write("Masukkan informasi berikut untuk memprediksi risiko diabetes:")
 
 # Input fields
-st.subheader("Masukkan Data:")
 data = {}
 for feature in features_columns:
     if feature == 'Age':
-        data[feature] = st.slider(f"{feature} (Usia):", min_value=1, max_value=120, value=25)
+        data[feature] = st.number_input(f"{feature} (Usia):", min_value=1, max_value=120, value=25)
     else:
-        data[feature] = st.radio(f"{feature} (0=Tidak, 1=Ya):", options=[0, 1], horizontal=True)
-
-st.write("---")
+        data[feature] = st.radio(f"{feature} (0=Tidak, 1=Ya):", options=[0, 1])
 
 # Predict button
-if st.button("Prediksi Risiko Diabetes"):
+if st.button("Prediksi"):
     try:
         # Prepare input data
         input_data = np.array([data[feature] for feature in features_columns]).reshape(1, -1)
@@ -45,15 +30,6 @@ if st.button("Prediksi Risiko Diabetes"):
         prediction_class = label_encoders['class'].inverse_transform([prediction])[0]
 
         # Display result
-        st.success(f"Hasil Prediksi: **{prediction_class}**")
-        if prediction_class == "Positive":
-            st.warning("Risiko diabetes Anda tinggi. Harap konsultasi dengan dokter.")
-        else:
-            st.info("Risiko diabetes Anda rendah. Tetap jaga pola hidup sehat!")
+        st.success(f"Hasil Prediksi: {prediction_class}")
     except Exception as e:
-        st.error(f"Terjadi kesalahan: {e}")
-
-# Footer
-st.write("---")
-st.markdown("💡 **Tips:** Untuk hasil terbaik, pastikan data yang Anda masukkan akurat.")
-st.markdown("🔗 **Dikembangkan oleh [Nama Anda](https://example.com).**")
+        st.error(f"Error: {e}")
