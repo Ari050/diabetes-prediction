@@ -38,14 +38,26 @@ st.write("---")
 # Input fields
 st.subheader("Masukkan Data:")
 data = {}
-for feature in features_columns:
-    if feature == 'Age':
-        data[feature] = st.slider(f"{feature} (Usia):", min_value=1, max_value=120, value=25)
-    else:
-        data[feature] = st.radio(f"{feature} (0=Tidak, 1=Ya):", options=[0, 1], horizontal=True)
+data["Age"] = st.slider("Berapa usia Anda?", min_value=1, max_value=120, value=25)
+data["Gender"] = st.radio("Apa jenis kelamin Anda?", options=["Pria", "Wanita"])
+data["Gender"] = 0 if data["Gender"] == "Pria" else 1
+
+data["Polyuria"] = st.radio("Apakah Anda sering buang air kecil secara berlebihan?", options=[0, 1], format_func=lambda x: "Tidak" if x == 0 else "Ya")
+data["Polydipsia"] = st.radio("Apakah Anda merasa haus secara berlebihan?", options=[0, 1], format_func=lambda x: "Tidak" if x == 0 else "Ya")
+data["sudden weight loss"] = st.radio("Apakah Anda mengalami penurunan berat badan secara tiba-tiba?", options=[0, 1], format_func=lambda x: "Tidak" if x == 0 else "Ya")
+data["weakness"] = st.radio("Apakah Anda merasa lemah atau lesu?", options=[0, 1], format_func=lambda x: "Tidak" if x == 0 else "Ya")
+data["Polyphagia"] = st.radio("Apakah Anda sering merasa lapar secara berlebihan?", options=[0, 1], format_func=lambda x: "Tidak" if x == 0 else "Ya")
+data["Genital thrush"] = st.radio("Apakah Anda pernah mengalami infeksi genital?", options=[0, 1], format_func=lambda x: "Tidak" if x == 0 else "Ya")
+data["visual blurring"] = st.radio("Apakah Anda mengalami penglihatan kabur?", options=[0, 1], format_func=lambda x: "Tidak" if x == 0 else "Ya")
+data["Itching"] = st.radio("Apakah Anda sering merasa gatal?", options=[0, 1], format_func=lambda x: "Tidak" if x == 0 else "Ya")
+data["Irritability"] = st.radio("Apakah Anda sering merasa mudah marah?", options=[0, 1], format_func=lambda x: "Tidak" if x == 0 else "Ya")
+data["delayed healing"] = st.radio("Apakah luka Anda memerlukan waktu lama untuk sembuh?", options=[0, 1], format_func=lambda x: "Tidak" if x == 0 else "Ya")
+data["partial paresis"] = st.radio("Apakah Anda mengalami kesulitan menggerakkan sebagian tubuh?", options=[0, 1], format_func=lambda x: "Tidak" if x == 0 else "Ya")
+data["muscle stiffness"] = st.radio("Apakah Anda sering mengalami kekakuan otot?", options=[0, 1], format_func=lambda x: "Tidak" if x == 0 else "Ya")
+data["Alopecia"] = st.radio("Apakah Anda mengalami kebotakan?", options=[0, 1], format_func=lambda x: "Tidak" if x == 0 else "Ya")
+data["Obesity"] = st.radio("Apakah Anda mengalami obesitas?", options=[0, 1], format_func=lambda x: "Tidak" if x == 0 else "Ya")
 
 st.write("---")
-
 # Predict button
 if st.button("Prediksi Risiko Diabetes"):
     try:
