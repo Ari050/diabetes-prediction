@@ -13,10 +13,20 @@ st.set_page_config(page_title="Prediksi Diabetes", page_icon="🩺", layout="cen
 # Sidebar
 with st.sidebar:
     st.image("https://via.placeholder.com/300x200.png?text=Diabetes+Prediction", caption="Prediksi Diabetes", use_column_width=True)
-    st.write("Masukkan informasi kesehatan Anda di form untuk mengetahui risiko diabetes.")
-    st.markdown("**Instruksi:**")
-    st.markdown("1. Isi semua kolom dengan informasi yang sesuai.")
-    st.markdown("2. Klik tombol **Prediksi** untuk melihat hasilnya.")
+    
+    st.write("### Informasi Terkait Diabetes")
+    st.markdown("""
+    - **Pola Hidup Sehat:** Rutin olahraga dan makan makanan sehat dapat membantu mengelola diabetes.
+    - **Obat Diabetes:** Konsultasikan dengan dokter untuk memilih obat yang tepat.
+    - **Cek Gula Darah Rutin:** Pantau kadar gula darah secara teratur untuk mencegah komplikasi.
+    - **Edukasi:** Pahami faktor risiko diabetes seperti obesitas, pola makan, dan gaya hidup.
+    """)
+
+    st.write("### Instruksi Penggunaan")
+    st.markdown("""
+    1. Isi semua kolom dengan informasi yang sesuai.
+    2. Klik tombol **Prediksi** untuk melihat hasilnya.
+    """)
 
 # Header
 st.title("🩺 Aplikasi Prediksi Diabetes")
