@@ -68,4 +68,4 @@ if st.button("Prediksi Risiko Diabetes"):
 # Footer
 st.write("---")
 st.markdown("💡 **Tips:** Untuk hasil terbaik, pastikan data yang Anda masukkan akurat.")
-st.markdown("🔗 **Dikembangkan oleh [Nama Anda](https://example.com).**")
+st.markdown("🔗 **Dikembangkan oleh [Ashari Wahyudi](https://www.instagram.com/ashariwahyudi05/profilecard/?igsh=MW45MG4zZGZ5NXc5MQ== ).**")
