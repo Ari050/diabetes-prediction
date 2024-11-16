@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulir Deteksi Diabetes</title>
+</head>
+<body>
+  <h1>Formulir Deteksi Diabetes</h1>
+  
+  <form id="diabetes-form">
+    <label for="age">Umur:</label>
+    <input type="number" id="age" name="Age" required><br>
+
+    <label for="gender">Jenis Kelamin (0=Pria, 1=Wanita):</label>
+    <input type="number" id="gender" name="Gender" required><br>
+
+    <label for="polyuria">Polyuria (0=Tidak, 1=Ya):</label>
+    <input type="number" id="polyuria" name="Polyuria" required><br>
+
+    <label for="polydipsia">Polydipsia (0=Tidak, 1=Ya):</label>
+    <input type="number" id="polydipsia" name="Polydipsia" required><br>
+
+    <label for="sudden-weight-loss">Penurunan Berat Badan Mendadak (0=Tidak, 1=Ya):</label>
+    <input type="number" id="sudden-weight-loss" name="sudden weight loss" required><br>
+
+    <label for="weakness">Kelemahan (0=Tidak, 1=Ya):</label>
+    <input type="number" id="weakness" name="weakness" required><br>
+
+    <label for="polyphagia">Polyphagia (0=Tidak, 1=Ya):</label>
+    <input type="number" id="polyphagia" name="Polyphagia" required><br>
+
+    <label for="genital-thrush">Infeksi Genital (0=Tidak, 1=Ya):</label>
+    <input type="number" id="genital-thrush" name="Genital thrush" required><br>
+
+    <label for="visual-blurring">Penglihatan Kabur (0=Tidak, 1=Ya):</label>
+    <input type="number" id="visual-blurring" name="visual blurring" required><br>
+
+    <label for="itching">Gatal (0=Tidak, 1=Ya):</label>
+    <input type="number" id="itching" name="Itching" required><br>
+
+    <label for="irritability">Iritabilitas (0=Tidak, 1=Ya):</label>
+    <input type="number" id="irritability" name="Irritability" required><br>
+
+    <label for="delayed-healing">Luka Lama Sembuh (0=Tidak, 1=Ya):</label>
+    <input type="number" id="delayed-healing" name="delayed healing" required><br>
+
+    <label for="partial-paresis">Paresis Parsial (0=Tidak, 1=Ya):</label>
+    <input type="number" id="partial-paresis" name="partial paresis" required><br>
+
+    <label for="muscle-stiffness">Kekakuan Otot (0=Tidak, 1=Ya):</label>
+    <input type="number" id="muscle-stiffness" name="muscle stiffness" required><br>
+
+    <label for="alopecia">Kebotakan (0=Tidak, 1=Ya):</label>
+    <input type="number" id="alopecia" name="Alopecia" required><br>
+
+    <label for="obesity">Obesitas (0=Tidak, 1=Ya):</label>
+    <input type="number" id="obesity" name="Obesity" required><br>
+
+    <button type="submit">Kirim</button>
+  </form>
+
+  <p id="result"></p>
+
+  <script>
+    document.getElementById('diabetes-form').addEventListener('submit', async function(event) {
+      event.preventDefault();
+
+      // Ambil data dari formulir
+      const formData = new FormData(event.target);
+      const data = {};
+      formData.forEach((value, key) => {
+        data[key] = value;
+      });
+
+      try {
+        const response = await fetch('http://127.0.0.1:5000/predict', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        });
+
+        const result = await response.json();
+
+        if (result.error) {
+          document.getElementById('result').textContent = `Error: ${result.error}`;
+        } else {
+          document.getElementById('result').textContent = `Hasil Prediksi: ${result.prediction}`;
+        }
+      } catch (error) {
+        document.getElementById('result').textContent = `Error: ${error.message}`;
+      }
+    });
+  </script>
+</body>
+</html>
