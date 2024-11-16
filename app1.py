@@ -12,7 +12,7 @@ st.set_page_config(page_title="Prediksi Diabetes", page_icon="🩺", layout="cen
 
 # Sidebar
 with st.sidebar:
-    st.image("https://via.placeholder.com/300x200.png?text=Diabetes+Prediction", caption="Prediksi Diabetes", use_column_width=True)
+    st.image("diabetes.png", caption="Pentingnya Deteksi Dini Diabetes", use_column_width=True)
     
     st.write("### Informasi Terkait Diabetes")
     st.markdown("""
